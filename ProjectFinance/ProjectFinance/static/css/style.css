@@ -1,0 +1,99 @@
+.box1{
+    background: linear-gradient(180deg, #006faf  45% , #0091e6, #00b7ff);
+    color: white;
+    opacity: 0.95;
+    background-attachment: fixed;
+}
+
+.rounded {
+    border-radius: 25px;
+    background: #FFFFFF;
+    padding: 20px; 
+    width: 200px;
+    height: 150px; 
+  }
+
+.navcolor{
+    background-color: #006faf;
+    font-family: 'Dosis', sans-serif;
+
+}
+
+  .navspacing{
+      padding-left: 35px;
+  }
+
+  .softpad{
+    padding-top:40px; 
+    padding-bottom: 80px;
+  }
+
+  .softpad2{
+    padding-top:120px; 
+    padding-bottom: 120px;
+  }
+
+  /* Rules for sizing the icon. */
+.material-icons.md-18 { font-size: 18px; padding: 10px;}
+.material-icons.md-24 { font-size: 24px; padding: 10px;}
+.material-icons.md-36 { font-size: 36px; padding: 10px;}
+.material-icons.md-48 { font-size: 48px; padding: 10px; }
+
+/* Rules for using icons as black on a light background. */
+.material-icons.md-dark { color: rgba(0, 0, 0, 0.54); }
+.material-icons.md-dark.md-inactive { color: rgba(0, 0, 0, 0.26); }
+
+/* Rules for using icons as white on a dark background. */
+.material-icons.md-light { color: rgba(255, 255, 255, 1); }
+.material-icons.md-light.md-inactive { color: rgba(255, 255, 255, 0.3); }
+
+
+.sidebar {
+    color: #FFF;
+    background: #2b2b2d;
+    width: 250px;
+    max-width: 250px;
+    height: 100%;
+    float: left;
+    position: fixed;
+    z-index: 1000;
+    display: block;
+    -webkit-transition: margin 2s;
+    transition: margin 2s;
+  flex:1;
+}
+#navbar-toggle {
+    cursor: pointer;
+}
+#toggleView {
+    margin-left: 44px;
+}
+.menu-icon {
+    float: right;
+}
+.sidebar-nav {
+    display: block;
+    float: left;
+    width: 100%;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.sidebar-nav li a {
+    padding-left: 20px;
+    font-size: 16px;
+    text-decoration: none;
+    color: #FFF;
+    float: left;
+    text-decoration: none;
+    width: 100%;
+    height: 70px;
+    line-height: 25px;
+    padding: 20px;
+    vertical-align: center;
+}
+.sidebar-nav li a:hover {
+    background:#121213;
+    -webkit-transition: background 0.5s;
+    transition: background 0.5s;
+}
