@@ -1,8 +1,10 @@
 # 463_SoftwareTesting
 
+## Team Members
+
 Nancy Badillo n_badillo@csu.fullerton.edu
 
-Theresa Tanubrata
+Theresa Tanubrata theresatanubrata123@csu.fullerton.edu
 
 Sarah Nuno
 
