@@ -1,0 +1,43 @@
+{% extends 'budget/base.html' %}
+{% block content %}
+
+{% if user.is_authenticated %}
+    <h1 class="bold">My Projects</h1>
+    <hr>
+
+    <div class="row">
+    {% for project in project_list  %}
+
+        <div class="col s12 l3">
+            <div class="card-panel">
+                <h5>{{ project.name  }}</h5>
+                <a href="{% url 'detail' project.slug %}" class="btn">Visit</a>
+            </div>
+        </div>
+        
+        {% empty %}
+
+        <div class="noproject-wrapper center">
+            <h3 class="grey-text">Sorry, you don't have any projects yet. </h3>
+        </div>
+
+    {% endfor %}
+    </div>
+
+    <div class="row center" style="padding:10px 0 40px 0">
+        <a href="add" class="btn">Create New Project</a>
+    </div>
+
+{% else %}
+    <div class="center">
+        <h1>Welcome to Budget App</h1>
+        <h3>Created by: The Slackers</h3>
+        <p>To use our web app you must either login or sign up with a new account.</p>
+        <div style="padding:25px">
+                <a href="{% url 'login' %}" class="btn">Login</a>
+                <a href="{% url 'register' %}" class="btn">Sign Up</a>
+        </div>
+    </div>
+{% endif %}
+
+{% endblock  %}

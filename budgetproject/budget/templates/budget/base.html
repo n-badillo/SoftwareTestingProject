@@ -1,0 +1,43 @@
+{% load static  %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Budget App</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="row navbar">
+                <a href="{% url 'list' %}" class="btn">Budget App</a>
+                <div class="right">
+                    {% if user.is_authenticated %}
+                    User: <a href="{% url 'list' %}" style="color:black">{{ user.username }}</a>
+                    <a href="{% url 'logout' %}">Logout</a>
+                    {% else %}
+                    <a href="{% url 'login' %}">Login</a>
+                    <a href="{% url 'register' %}">Sign Up</a>
+                    {% endif %}
+                </div>
+        </div>
+        
+        {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-{{ message.tag }} center">
+                {{ message }}
+            </div>
+            {% endfor %}
+        {% endif %}
+
+        {% block content %}
+
+        {% endblock %}
+        
+    </div>
+</body>
+</html> 
