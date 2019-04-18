@@ -4,10 +4,15 @@ from .models import Project, Category, Expense
 from django.views.generic import CreateView
 from django.utils.text import slugify
 from .forms import ExpenseForm
+from django.contrib.auth.models import User
 import json
 
+
 def project_list(request):
-    project_list = Project.objects.all()
+    if request.user.is_authenticated:
+        project_list = Project.objects.filter(user=request.user)
+    else:
+        project_list = Project.objects.all()
     return render(request, 'budget/project-list.html', {'project_list':project_list})
 
 def project_detail(request, project_slug):
@@ -50,6 +55,7 @@ class ProjectCreateView(CreateView):
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
+        self.object.user = self.request.user
         self.object.save()
 
         categories = self.request.POST['categoriesString'].split(',')
