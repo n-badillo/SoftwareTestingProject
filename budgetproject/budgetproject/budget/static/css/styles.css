@@ -1,26 +1,25 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat');
 
-/* General */
-html{
-    font-family: 'Montserrat';
-    background-color: #E0E0E0;
+
+/*  General CSS for Body*/
+.box{
+    background: linear-gradient(180deg, #81C3D7 15%, #3A7CA5, #16425B);
+    color: white;
+    opacity: 0.95;
+    background-attachment: fixed;
 }
 
-.bold{
-    font-weight: bold;
+.bg-blue{
+    background: #2F6690;
+    color: #D9DCD6;
 }
 
-.row{
-    margin: 0!important;
+.bg-w{
+    background: #D9DCD6; 
 }
 
-/* Nav Bar */
-.navbar{
-    padding: 20px 20px 20px 0;
-    vertical-align: middle;  
-}
-a+a{
-    margin-left: 5px;
+.rounded{
+    border-radius: 7px;
 }
 
 /* Project List (no projects) */
