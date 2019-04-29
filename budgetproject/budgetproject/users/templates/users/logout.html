@@ -1,14 +1,26 @@
 {% extends 'budget/base.html' %}
 {% block content %}
-<hr>
-<h2>You have been logged out.</h2>
-<div>
-    <small class="text-muted">
-        <a href="{% url 'login' %}">Log In Again</a>
-        <a href="{% url 'list' %}">Go Home</a>
-    </small>
+<div class="container rounded text-dark" style="background: #E7ECEF; ">
+    <div class="content-section">
+        <form method="POST">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Join</legend>
+                {{ form.as_p }}
+            </fieldset>
+            <br/>
+            <div class="form-group">
+                <button class="btn btn-outline-info" type="submit">Sign Up</button>
+            </div>
+        </form>
+        <hr>
+        <div>
+            <small class="text-muted">
+                Already Have an Account? <a href="{% url 'login' %}" class="ml-2">Log In</a>
+            </small>
+        </div>
+        <br/><br/>
+    </div>
+
 </div>
-
-<br/><br/>
-
 {% endblock %}
