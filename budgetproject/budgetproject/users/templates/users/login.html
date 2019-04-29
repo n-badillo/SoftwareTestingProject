@@ -1,24 +1,25 @@
 {% extends 'budget/base.html' %}
 {% block content %}
-    <div class="content-section">
+<center>
+    <h1 style="margin-top: 15vh; color: #36453B;">Welcome back.</h1>
+    <div class="container text-dark rounded" style="padding-top: 2vh; padding-bottom: 2vh; width: 50vw; background: #E7ECEF;">
+        <h3>Please Login.</h3>
+        <hr style="width:30vw;">
         <form method="POST">
             {% csrf_token %}
             <fieldset class="form-group">
-                <legend class="border-bottom mb-4">Login</legend>
                 {{ form }}
             </fieldset>
-            <br/>
+            <br />
             <div class="form-group">
-                <button class="btn btn-outline-info" type="submit">Login</button>
+                <button type="submit" class="btn btn-lg" style="width: 30vw; background: #81C3D7">Login</button>
             </div>
         </form>
-        <hr>
-        <div>
-            <small class="text-muted">
-                Need an Account? <a href="{% url 'register' %}" class="ml-2">Sign Up Now</a>
-            </small>
-        </div>
-        <br/><br/>
+        <small class="text-muted">
+            Need an Account? <a href="{% url 'register' %}" class="ml-2">Sign Up Now</a>
+        </small>
     </div>
+
+</center>
 
 {% endblock %}
