@@ -1,5 +1,6 @@
 {% extends 'budget/base.html' %}
 {% block content %}
+<div class="container rounded text-dark" style="background: #E7ECEF; ">
     <div class="content-section">
         <form method="POST">
             {% csrf_token %}
@@ -21,4 +22,5 @@
         <br/><br/>
     </div>
 
+</div>
 {% endblock %}
