@@ -1,97 +1,136 @@
 {% extends 'budget/base.html' %}
 {% block content %}
-<section class="section section-stats">
+
+<!-- SECTION for DASHBOARD -->
+<div class="container txt-body">
+    <h3 class="text-white display-3">{{project.name}}</h3>
+</div>
+
+<!-- SECTION for TOTAL BUDGET/TOTAL TRANS/REMAINING -->
+<div class="container txt-body" style="margin-top: 5vh; margin-bottom:padding-bottom: 15px;">
+
     <div class="row">
-        <div class="col s12 m12 l4">
-            <div class="card-panel">
-                <h6 class = "bold">Total Budget</h6>
-                <h1 class = "bold">{{ project.budget }}</h1>
+    <div class="col"> <!-- Start of Total Budget -->
+        <div class="card"> 
+            <div class="card-body">
+                <center>
+                    <h4 class="display-4">${{ project.budget }}</h4>
+                    <p>Total Budget</p>
+                </center>
             </div>
         </div>
-        <div class="col s12 m6 l4">
-            <div class="card-panel">
-                <h6 class = "bold">Budget Left</h6>
-                {% if project.budget_left > 0 %}
-                    <h1 class = "bold green-text">${{ project.budget_left }}</h1>
-                {% elif project.budget_left == 0 %}
-                    <h1 class = "bold orange-text">${{ project.budget_left }}</h1>
-                {% else %}
-                    <h1 class = "bold red-text">${{ project.budget_left }}</h1>
-                {% endif%}
+    </div>  <!-- End of Total Budget -->
+
+    <div class="col"> <!-- Start of Total Transactions -->
+        <div class="card">
+            <div class="card-body">
+                <center>
+                    <h4 class="display-4">{{ project.total_transactions }}</h4>
+                    <p>Total Transactions</p>
+                </center>
             </div>
         </div>
-        <div class="col s12 m6 l4">
-            <div class="card-panel">
-                <h6 class = "bold">Total Transactions</h6>
-                <h1 class = "bold">{{ project.total_transactions }}</h1>
+    </div> <!-- End of Total Transactions -->
+
+    <div class="col"> <!-- Start of Remaining Budget -->
+        <div class="card">
+            <div class="card-body">
+                <center>
+                    {% if project.budget_left > 0 %}
+                        <h4 class = "display-4" style="color: #66CBB5;">${{ project.budget_left }}</h4>
+                    {% elif project.budget_left == 0 %}                
+                        <h4 class = "display-4" style="color: #FFC600;">${{ project.budget_left }}</h4>
+                    {% else %}
+                        <h4 class = "display-4" style="color: #FF907D;">${{ project.budget_left }}</h4>
+                    {% endif%}
+                <p>Budget Remaining</p>
+                </center>
+            </div>
+        </div>
+    </div> <!-- End of Remaining Budget -->
+    </div>
+</div>
+
+<!-- SECTION for EXPENSES -->
+<div class="txt-body bg-white" style="margin-top: 5vh; margin-bottom:padding-bottom: 15px;">
+
+ <div class="container" style="padding: 15px; margin-bottom: 5px;">
+    <div class="card" style="margin-top: 5px; margin-bottom: 5px; border-width: 0px;">
+        <div class="card-body" style="padding-top: 5px; padding-bottom: 5px; margin-right: 5px;">
+            <div class="row">
+            <div class="col-sm-3 align-self-center txt-h1"><b>Expense Name</b></div>
+            <div class="col-sm-4 align-self-center txt-h2" style="padding-left: 150px;" ><b>Amount Spent</b></div>
+            <div class="col-sm-3 align-self-center txt-h2" style="padding-left: 150px;"><b>Category</b></div>
+            <div class="col-sm-2 align-self-center justify-content-end"><center>
+                <button type="button" class="btn btn-b" href="#expenseModal" data-toggle="modal"><b>+</b> Add Expense</button></center>
             </div>
         </div>
     </div>
-</section>
 
-<section class="section section-expenses">
-    <div class="row">
-        <button class="btn waves-effect right modal-trigger" href="#expenseModal">            
-            <i class="material-icons white-text left">add_circle</i>
-            Add Expense
-        </button>
-    </div>
-
-    <ul class="z-depth-1">
-
-        {% for expense in expense_list %}
+    <ul>
+    {% for expense in expense_list %} <!-- displaying expenses using a for loop -->
         <li>
-            <div class="card-panel z-depth-0 expense">
-                <div class="row">
+            <div class="card" style="margin-top: 0px; margin-bottom: 0px; border-color: transparent; ">
+                <div class="card-body" style="margin-top: 3px; padding-top: 10px; padding-bottom: 5px; margin-right: 5px;">
+                    <div class="row">
+                    <div class="col-sm-3 align-self-center txt-body"><b>{{ expense.title }}</b></div>
+                    <div class="col-sm-4 align-self-center"><center>${{ expense.amount }}</center></div>
+                    <div class="col-sm-4 align-self-center "><center>{{ expense.category.name }}<center></div>
+                    <div class="col-sm-1 align-self-center justify-content-end">      
+                        <a class="" onclick="deleteExpense(this)" data-id="{{ expense.id }}">
+                                <i class="material-icons">delete_forever</i></a>
+                    </div>
 
-                    <div class="col l6">
-                        <span class="title">{{ expense.title }}</span>
-                    </div> 
-
-                    <div class="col l3">
-                            <span class="title">${{ expense.amount }}</span>
-                    </div> 
-
-                    <div class="col 1">
-                            <span class="title bold">{{ expense.category.name }}</span>
-                    </div> 
-
-                    <a class="close-icon" onclick="deleteExpense(this)" data-id="{{ expense.id }}">
-                        <i class="material-icons red-text right">close</i>
-                    </a>
+                    </div>
                 </div>
             </div>
         </li>
-        {% endfor %}
-         
-    </ul>
-</section>
 
-<div class="center">
-        <a href="{% url 'list' %}" class="btn">Back to Projects</a>
+        {% empty %}
+                    <div class="txt-body bg-white" style="padding-top: 7vh; padding-bottom: 7vh;">
+            <center>
+                    <h1 class="display-4" style="font-size:2.5rem; padding: 10px;" > No transactions available</h1>
+                    <button type="button" class="btn btn-b" href="#expenseModal" data-toggle="modal"><b>+</b> Add Expense</button>
+                    <p style="padding: 10px;">
+                    <small>Need help getting started? <a href="#">Learn more!</a></small>
+                    </p>
+                </center>
+            </div>
+
+    {% endfor %}
+        </ul>
+    </div>
 </div>
 
-<div class="modal" id="expenseModal">
-<div id="modal-content">
-    <h4>Add Expense</h4>
-
-    <form method="POST">
-        {% csrf_token %}
-        <label for="title">Title</label>
-        <input name="title" id="title">
-
-        <label for="amount">Amount</label>
-        <input name="amount" id="amount">
-
-        <select name="category">
-            {% for category in category_list %}
-            <option>{{ category.name }}</option>
-            {% endfor %}
-        </select>
-
-        <button type="submit" class="btn">Add</button>
-    </form>
-</div>
+    <!-- MODAL FOR ADD EXPENSE -->
+      <div class="modal fade" id="expenseModal" tabindex="-1" role="dialog" aria-labelledby="expenseModal" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="expenseModal">Add An Expense</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form method="POST">
+                                        {% csrf_token %}
+                              <label for="title">Title</label>
+                              <input name="title" id="title">
+                      
+                              <label for="amount">Amount</label>
+                              <input name="amount" id="amount">
+                      
+                              <select name="category">
+                                  {% for category in category_list %}
+                                  <option>{{ category.name }}</option>
+                                  {% endfor %}
+                              </select>
+                              <button type="submit" class="btn btn-primary">Add Expense</button>
+                          </form>
+            </div>
+          </div>
+        </div>
 
 <script>
     var elem = document.querySelector('.modal')
