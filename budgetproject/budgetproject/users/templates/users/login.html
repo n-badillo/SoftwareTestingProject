@@ -1,8 +1,8 @@
 {% extends 'budget/base.html' %}
 {% block content %}
 <center>
-    <h1 style="margin-top: 15vh; color: #36453B;">Welcome back.</h1>
-    <div class="container text-dark rounded" style="padding-top: 2vh; padding-bottom: 2vh; width: 50vw; background: #E7ECEF;">
+ <h1 style="margin-top: 20vh;">Welcome back.</h1>
+    <div class="container bg-white text-dark rounded" style="padding-top: 2vh; padding-bottom: 2vh; width: 40vw;">
         <h3>Please Login.</h3>
         <hr style="width:30vw;">
         <form method="POST">
@@ -10,14 +10,14 @@
             <fieldset class="form-group">
                 {{ form }}
             </fieldset>
-            <br />
+            <br/>
             <div class="form-group">
-                <button type="submit" class="btn btn-lg" style="width: 30vw; background: #81C3D7">Login</button>
+                 <button type="submit" class="btn btn-outline-blue" style="width: 10vw;">Login</button>
             </div>
         </form>
-        <small class="text-muted">
-            Need an Account? <a href="{% url 'register' %}" class="ml-2">Sign Up Now</a>
-        </small>
+                        <small class="text-muted">
+                Need an Account? <a href="{% url 'register' %}" class="ml-2">Sign Up Now</a>
+            </small>
     </div>
 
 </center>
