@@ -1,54 +1,83 @@
+<!-- Main Project Dashboard for users -->
+
 {% extends 'budget/base.html' %}
 {% block content %}
 
-{% if user.is_authenticated %}
-<div class="container text-dark" style="background: #E7ECEF;">
-    <center><h1 class="bold" style="padding-top: 15px; padding-bottom: 15px;">{{ user.username }}'s Projects</h1>
-        <a href="add" class="btn btn-lg text-white btn-block" style="background: #2F6690; width: 45vw;">Create New Project</a>
-    </center>
+{% if user.is_authenticated %} <!-- If the user has an account, it will display the projects they have-->
+<div class="container txt-body">
+    <h4 class="display-4 text-white">Dashboard</h4>
+</div>
 
-    <div class="row" style="padding-top: 2vh;">
-    {% for project in project_list  %}
+<div class="txt-body bg-white" style="margin-top: 5vh; margin-bottom:padding-bottom: 15px;">
 
-        <div class="col-sm-6">
-            <center>
-            <div class="card" style="background: transparent; border-color: transparent;">
-                <div class="card-body">
-                <h5 class="card-title">{{ project.name  }}</h5>
-                <span class="badge badge-success">${{project.budget}} Budget</span> <span class="badge badge-danger">${{project.budget_left}} Left</span> <span class="badge badge-warning">{{project.total_transactions}} Transactions</span>
-                <a href="{% url 'detail' project.slug %}" class="btn text-white"  style="background: #2F6690; width: 25vw;">View</a>
+ <div class="container" style="padding: 15px;">
+    <div class="card" style="margin-top: 5px; margin-bottom: 5px; border-width: 0px;">
+        <div class="card-body" style="padding-top: 5px; padding-bottom: 5px; margin-right: 5px;">
+            <div class="row">
+            <div class="col align-self-center txt-h1"><b>Project Name</b></div>
+            <div class="col align-self-center txt-h2" ><b>Starting Budget</b></div>
+            <div class="col align-self-center txt-h2"><b>Transactions</b></div>
+            <div class="col align-self-center txt-h2"><b>Budget Remaining</b></div>
+            <div class="align-self-center justify-content-end">
+                <a href="add" class="btn btn-b"> <b>+</b> Project</a>
             </div>
-        </center>
         </div>
-        
-        {% empty %}
+    </div>
 
-        <div class="noproject-wrapper center">
-            <h3 class="text-muted">Sorry, you don't have any projects yet. </h3>
+    {% for project in project_list  %} <!-- displaying projects using a for loop -->
+
+    <div class="card" style="margin-top: 10px; margin-bottom: 10px; box-shadow: 0 0 5px 2px rgba(0,0,0,0.1);">
+        <div class="card-body" style="padding-top: 15px; padding-bottom: 15px; margin-right: 5px;">
+            <div class="row">
+            <div class="col align-self-center txt-body"><b>{{ project.name  }}</b></div>
+            <div class="col align-self-center">${{project.budget}}</div>
+            <div class="col align-self-center ">{{project.total_transactions}}</div>
+            <div class="col align-self-center">${{project.budget_left}}</div>
+            <div class="align-self-center justify-content-end" style="margin-right: 20px;">      
+                <a href="{% url 'detail' project.slug %}">View</a>
+            </div>
+
+            </div>
         </div>
+    </div>
+
+        {% empty %} <!-- If the user-->
+
+            <div class="txt-body bg-white" style="padding-top: 15vh; padding-bottom: 15vh;">
+            <center>
+                    <h1 class="display-4" style="font-size:2.5rem; padding: 10px;" > No projects currently saved</h1>
+                    <a href="add" class="btn btn-outline-purple">Get started</a>
+                    <p style="padding: 10px;">
+                    <small>Need help getting started? <a href="#">Learn more!</a></small>
+                    </p>
+                </center>
+            </div>
 
     {% endfor %}
     </div>
-
+                        
 
 </div>
+
+
+
+
+   
+
 {% else %}
 <center>
-        <h1 class="text-muted" style="margin-top: 20vh;">Welcome to Budget App</h1>
-        <div class="containter rounded text-dark" style="padding-top: 2vh; padding-bottom: 2vh; width: 40vw; background: #E7ECEF;">
+        <h1 style="margin-top: 20vh;">Welcome to Budget Buddy</h1>
+        <div class="containter rounded bg-white text-dark" style="padding-top: 2vh; padding-bottom: 2vh; width: 40vw;">
         <h3> Tracking your money, made easy.</h3>
         <hr style="width: 30vw;">
         <p>To use our web app you must either login or sign up with a new account.</p>
 
-     <a class="btn btn-lg btn-block" style="background: #81C3D7; width: 25vw;" href="{% url 'login' %}" role="button">Login</a>
-          <a class="btn btn-lg btn-secondary btn-block" style="width: 25vw;" href="{% url 'register' %}" role="button">Register</a>
+     <a class="btn btn-lg btn-outline-blue btn-block" style="width: 25vw;" href="{% url 'login' %}" role="button">Login</a>
+          <a class="btn btn-lg btn-outline-blue btn-block" style="width: 25vw;" href="{% url 'register' %}" role="button">Register</a>
         
         </center>
         </div>
     </div>
-
-
-    
 {% endif %}
 
 {% endblock  %}
