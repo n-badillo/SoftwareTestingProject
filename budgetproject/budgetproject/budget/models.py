@@ -1,19 +1,15 @@
 from django.db import models
 from django.utils.text import slugify
 from django.contrib.auth.models import User
+from django.conf import settings
 import json
 
 
-#need to link all projects to a user with a cascade on delete if user is deleted
-#   i.e.: linked_user = models.ForeightKey(User, on_delete=models.CASCADE, related_name='linked_user')
 class Project(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, default=1, on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
     slug = models.SlugField(max_length=100, unique=True, blank=True)
     budget = models.DecimalField(max_digits=8, decimal_places=2)
-    '''
-    owner = models.ForeignKey(User, on_delete=models.CASCADE)
-
-    '''
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
@@ -53,10 +49,4 @@ class Expense(models.Model):
 
     class Meta:
         ordering = ('-amount',)
-
-#need to add a user class w/attributes:
-#   1. list of projects
-#   2. username
-#   3. fname 4. lname
-#   4. password
 
