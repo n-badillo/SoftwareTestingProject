@@ -1,27 +1,46 @@
 {% extends 'budget/base.html' %}
 {% load static %}
+
+{% block title %} | New Project{% endblock %}
+{%block page%}New Project{% endblock %}
+
 {% block content %}
 
+<!-- SECTION for TOTAL BUDGET/TOTAL TRANS/REMAINING -->
+<div class="txt-body flex bg-white" style="margin-top: 5vh; margin-bottom: 0px; padding-bottom: 10vh; padding-top: 10vh;">
+    <div class="container text-dark padding-horiz-10-v">
+        <form action="" method="POST">
+            {% csrf_token %}
+            <div class="row">
+                <div class="form-group col">
+                        <label for="id_name">Enter Project Name</label>
+                        <input type="text" name="name" required="" id="id_name" class="form-control" placeholder="Project Name">
+                    </div>
 
-<div class="container text-dark" style="background: #E7ECEF;">
-    <form action="" method="POST">
-        {% csrf_token %}
-        {{ form }}
-        <label for="categoryInput">Expense Categories (hit enter after every category)</label>
-        <input type="text" name="categoryInput" id="categoryInput">
-        <input type="hidden" name="categoriesString">
+                <div class=" form-group col">
+                    <label for="id_budget">Enter Project Budget</label>
+                    <input type="number" name="budget" step="0.01" required="" id="id_budget" class="form-control" placeholder="Budget Amount">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="categoryInput">Expense Categories</label> 
+                <input type="text" name="categoryInput" class="form-control" id="categoryInput" placeholder="Input a Category">
+                <small>Please press "Enter" after each category.</small>
+                <input type="hidden" name="categoriesString">
+
+                        <ul class="justify-content-start row" style="margin: 0 3px 0 3px;" id="categoriesContainer">
+                        <!-- Javascript for adding and displaying the categories -->
+                    </ul>
     
-        <ul id="categoriesContainer">
-        </ul>
-        
-        <button type="submit" class="btn">Start Project</button>
-    </form>
-    
-    <div class="center">
-            <a href="{% url 'list' %}" class="btn">Back to Projects</a>
+
+            <center>
+                    <a href="{% url 'list' %}" class="btn btn-outline-p" style="width: 15vw; margin-top: 20px;"> <i class="fas fa-long-arrow-alt-left"></i> Back to Dashboard</a>&ThickSpace;
+                    <button type="submit" class="btn btn-p" style="width: 15vw; margin-top: 20px;"> <i class="fas fa-plus-square"></i>&ThickSpace; Start Project</button>
+            </center>
+        </form>
+        <script src="{% static 'js/script.js' %}"></script>
+
+        {% endblock %}
     </div>
-    
-    <script src="{% static 'js/script.js' %}"></script>
 </div>
-
-{% endblock %}
