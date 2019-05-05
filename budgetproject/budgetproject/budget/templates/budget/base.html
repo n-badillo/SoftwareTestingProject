@@ -1,68 +1,149 @@
-{% load static  %}
+{% load static %}
+{% load humanize %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Budget App</title>
-<!-- Bootstrap Import -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>budgetBuddy{% block title %}{% endblock %}</title>
+  <!-- Bootstrap Import -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+    crossorigin="anonymous">
 
-<!-- Imports -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-    {% comment %} <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script> {% endcomment %}
+  <!-- Imports -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
-<body class="box">
 
-<nav class="navbar navbar-dark">
-  <a class="navbar-brand" href="{% url 'list' %}">
-    <img src="/docs/4.3/assets/brand/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top" alt="">
-    budget<b>Buddy</b>
-  </a>
-  <ul class="nav justify-content-end navbar-dark">
+<body>
 
-                    {% if user.is_authenticated %}
+  <nav class="navbar fixed-top" id="global-nav">
+    <a class="navbar-brand text-white" href="{% url 'list' %}">
+      <img src="" width="30" height="30" class="d-inline-block align-top" alt="">
+      budget<b>Buddy</b>
+    </a>
+    <ul class="nav justify-content-end navbar-dark">
 
-                     <li class="nav-item">
-   <a href="{% url 'list' %}" class="nav-link" style="color:white;">{{ user.username }}</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link text-white" href="{% url 'logout' %}">Log Out</a>
-  </li>
-                
-   {% else %}
-  <li class="nav-item">
-  <a class="btn text-white" href="{% url 'login' %}" role="button">Login</a>
-  </li>
-  <li class="nav-item">
-    <a class="btn text-white" href="{% url 'register' %}" role="button">Sign Up</a>
-  </li>
- {% endif %}
-</ul>
-</nav>     
+      {% if user.is_authenticated %}
 
+
+
+
+      <li class="nav-item">
+        <a href="{% url 'list' %}" class="nav-link" style="color:white;">{{ user.username }}</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white" href="{% url 'logout' %}">Log Out</a>
+      </li>
+
+      {% else %}
+      <li class="nav-item">
+        <a class="btn text-white" href="{% url 'login' %}" role="button">Login</a>
+      </li>
+      <li class="nav-item">
+        <a class="btn text-white" href="{% url 'register' %}" role="button">Sign Up</a>
+      </li>
+      {% endif %}
+    </ul>
+  </nav>
+
+  {% if user.is_authenticated%}
+  <!-- SECTION for USER INFORMATION -->
+  <div class="container dashboard-display">
+      <div class="row container">
+          <div class="col-sm-2 align-self-center"><a href="{% url 'list' %}"
+              <center><img src="https://gix.uw.edu/wp-content/uploads/2019/01/photo-placeholder-480x480.jpeg" class="user"></center></a>
+          </div>
+          <div class="col align-self-center">
+              <h2 class="">{{user.username}}</h2>
+              <h4 class="display-4">{% block page %}{% endblock %}</h4>
+          </div>
+      </div>
+
+  </div>
+
+{% else %}
+
+  {%endif%}
+  <!-- {% if messages %}
+  {% for message in messages %}
+  <div class="alert alert-{{ message.tag }} center">
+    {{ message }}
+  </div>
+  {% endfor %}
+  {% endif %} -->
+
+  {% block content %}
+
+  {% endblock %}
+
+  </div>
+</div>
+
+<footer class="container padding-top-5-v padding-horiz-5-v">
+  <div class="row">
+      <div class="col padding-horiz-5-v">
+      
+          <address>
+            <strong>budgetBuddy</strong><br>
+            123 Fake Street
+            <br>
+            Fullerton, California
+            <br>
+            (123) 456 - 456
+            </address>
   
-        {% if messages %}
-            {% for message in messages %}
-            <div class="alert alert-{{ message.tag }} center">
-                {{ message }}
-            </div>
-            {% endfor %}
-        {% endif %}
-
-        {% block content %}
-
-        {% endblock %}
-        
+          </div>
+    <div class="col">
+      <h5 stlye="font-weight-light">
+        Contact Us
+      </h5>
+            Report a Bug
+            <br>View Known Bugs
+            <br>Feedback
     </div>
+    <div class="col">
+      <h5 stlye="display-4">
+        About Us
+      </h5>
+      How to Use
+      <br>Company
+      <br>FAQ
+      </div>
 
-<!-- JavaScript Imports for Bootstrap -->
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </div>
+  <center><small class="text-muted">Copyright 2019 budgetBuddy</small></center>
+</footer>
+
+  <!-- JavaScript Imports for Bootstrap -->
+
+  <script>
+  $(document).ready(function(){
+    var scrollTop = 0;
+    $(window).scroll(function(){
+      scrollTop = $(window).scrollTop();
+       $('.counter').html(scrollTop);
+      
+      if (scrollTop >= 100) {
+        $('#global-nav').addClass('scrolled-nav');
+      } else if (scrollTop < 100) {
+        $('#global-nav').removeClass('scrolled-nav');
+      } 
+   
+    }); 
+    
+  });</script>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
 
 </body>
-</html> 
+
+</html>
