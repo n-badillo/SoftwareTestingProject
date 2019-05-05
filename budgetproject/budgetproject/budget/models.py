@@ -1,14 +1,19 @@
 from django.db import models
 from django.utils.text import slugify
-from django.conf import settings
+from django.contrib.auth.models import User
+import json
 
 
+#need to link all projects to a user with a cascade on delete if user is deleted
+#   i.e.: linked_user = models.ForeightKey(User, on_delete=models.CASCADE, related_name='linked_user')
 class Project(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, default=1, on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
     slug = models.SlugField(max_length=100, unique=True, blank=True)
-    budget = models.DecimalField(max_digits=10, decimal_places=2)
+    budget = models.DecimalField(max_digits=8, decimal_places=2)
+    '''
+    owner = models.ForeignKey(User, on_delete=models.CASCADE)
 
+    '''
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
@@ -19,8 +24,14 @@ class Project(models.Model):
         total_expense_amount = 0
         for expense in expense_list:
             total_expense_amount += expense.amount
-
         return self.budget - total_expense_amount
+
+    def budget_percentage(self):
+        expense_list = Expense.objects.filter(project=self)
+        total_expense_amount = 0
+        for expense in expense_list:
+            total_expense_amount += expense.amount
+        return (total_expense_amount/self.budget)*100
 
     def total_transactions(self):
         expense_list = Expense.objects.filter(project=self)
@@ -32,6 +43,8 @@ class Category(models.Model):
     name = models.CharField(max_length=50)
 
 
+
+
 class Expense(models.Model):
     project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='expenses')
     title = models.CharField(max_length=100)
@@ -40,4 +53,10 @@ class Expense(models.Model):
 
     class Meta:
         ordering = ('-amount',)
-        
+
+#need to add a user class w/attributes:
+#   1. list of projects
+#   2. username
+#   3. fname 4. lname
+#   4. password
+
