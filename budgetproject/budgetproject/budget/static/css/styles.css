@@ -1,13 +1,78 @@
 /*  General CSS for Body*/
-.box{
+body{
     background: linear-gradient(to top left, #7031AC 0%, #3088F3 100%);
     color: white;
     opacity: 0.95;
     background-attachment: fixed;
 }
 
+footer {
+    color: #fff;
+    margin-top: 50px;
+    border-radius: 9px 9px 0 0 ;
+    background: #343434;
+    left: 20vw;
+  }
+
+.welcome-display{
+    padding:  10vh 0 10vh 0;
+}
+
+.dashboard-display{
+    color: white;
+    padding-top: 80px;
+    margin-left: 23vw;
+    margin-right: 23vw;
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+}
+
+.heading-display{
+    color: white;
+    padding-top: 80px;
+    margin-left: 20vw;
+    margin-right: 20vw;
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+}
+
+#global-nav {
+    position: fixed;
+    top: 0;
+    z-index: 9999;
+    width: 100%;
+    color: #fff;
+  }
+
+.scrolled-nav{
+    background: white;
+    color: #3088F3;
+}
+
+
+.form-format{
+    width: 30vh;
+    position: float;
+}
+
+.counter {
+    width: 20px;
+    height: 20px;
+    background: black;
+    color: #fff;
+    position: fixed;
+    top: 120px;
+    right: 0;
+  }
+
+p{
+    padding: 10px;
+}
+
+
+
 .rounded{
-    border-radius: 7px;
+    border-radius: 9px;
 }
 
 ul{
@@ -15,25 +80,122 @@ ul{
     list-style: none;
 }
 
+.padding-top-5-v{
+    padding-top: 5vh; 
+}
+
+.padding-top-10-v{
+    padding-top: 10vh;
+}
+
+.padding-vert-5-v{
+    padding-top: 5vh; 
+    padding-bottom: 5vh;
+}
+
+
+.padding-vert-15-v{
+    padding-top: 15vh; 
+    padding-bottom: 15vh;
+}
+
+.padding-horiz-20-v{
+    padding-left: 20vw; 
+    padding-right: 20vw;
+}
+
+.padding-horiz-10-v{
+    padding-left: 10vw; 
+    padding-right: 10vw;
+}
+
+.padding-horiz-5-v{
+    padding-left: 5vw; 
+    padding-right: 5vw;
+}
+
+.margin-horiz-20-v{
+    margin-left: 20vw; 
+    margin-right: 20vw;
+}
+
+.margin-horiz-10-v{
+    margin-left: 10vw; 
+    margin-right: 10vw;
+}
+
+.margin-top-20-v{
+    margin-top: 20vh;
+}
+
+.margin-top-15-v{
+    margin-top: 15vh;
+}
+
+.margin-top-5-v{
+    margin-top: 5vh;
+}
+
+
+.margin-vert-3-v{
+    margin-top: 3vh;
+    margin-bottom: 3vh;
+}
+
+.margin-all-1-v{
+    margin: .5h .5vw .5vh .5vw;
+}
+
+.padding-vert-3-v{
+    padding-top: 3vh;
+    padding-bottom: 3vh;
+}
+
+.user{
+    font-size: 60px;
+    image-orientation: 45deg;
+    border-radius: 360px;
+    width: 120px;
+    height: 120px;
+}
+
+.project-list{
+    margin-top: 10px; 
+    margin-bottom: 10px; 
+    box-shadow: 0 0 5px 2px rgba(0,0,0,0.1);
+}
+
+.project-list-items{
+    padding-top: 15px; 
+    padding-bottom: 15px; 
+    margin-right: 5px;
+}
+
+.display-alert{
+    font-size:2.5rem; 
+    padding: 10px;
+}
+
+.card{
+    border-width: 0px;
+}
 
 /***** TEXT COLORS *****/
-.txt-dark{
-    color: #343434;
-}
+.txt-dark{ color: #343434;  }
+.txt-body{ color: #767676;  }
+.txt-d-blue{ color: #60A8F7;    }
+.txt-l-blue{ color: #93C3F8;    }
+.txt-danger{ color: red;   }
+.txt-warning{ color: #FFC600;   }
+.txt-success{ color: green;   }
+.txt-overbudget{ color: #bb0025;   }
 
-.txt-body{
-    color: #767676;
-}
-
-.txt-h1{
-    color: #60A8F7;
-}
-
-.txt-h2{
-    color: #93C3F8;
-}
 
 /***** BUTTON STYLES *****/
+.btn-close:hover{
+    color: red;
+}
+
 .btn-outline-blue{
     border-width: 2px;
     border-color: #3088F3;
@@ -48,6 +210,13 @@ color: white;
 background: #3088F3;
 }
 
+.btn-lg-20{
+    width: 20vh;
+}
+
+.btn-lg-30{
+    width: 30vh;
+}
 
 .btn-b{
     background: #3088F3;
@@ -66,7 +235,7 @@ color: white;
 }
 
 
-.btn-outline-purple{
+.btn-outline-p{
     border-width: 2px;
     border-color: #7031AC;
     border-style: solid;
@@ -75,45 +244,23 @@ color: white;
     font-weight: none;
 }
 
-.btn-outline-purple:hover{
+.btn-outline-p:hover{
 color: white;
 background: #7031AC;
 }
 
-/***** SCRIPTS FOR ICONS *****/
-@font-face {
-    font-family: 'Material Icons';
-    font-style: normal;
-    font-weight: 400;
-    src: url(https://example.com/MaterialIcons-Regular.eot); /* For IE6-8 */
-    src: local('Material Icons'),
-      local('MaterialIcons-Regular'),
-      url(https://example.com/MaterialIcons-Regular.woff2) format('woff2'),
-      url(https://example.com/MaterialIcons-Regular.woff) format('woff'),
-      url(https://example.com/MaterialIcons-Regular.ttf) format('truetype');
-  }
+.btn-p{
+    background: #7031AC;
+    border-style: solid;
+    border-width: 2px;
+    border-color: #7031AC;
+    border-radius: 9px;
+    color: white;
+    font-weight: none;
+}
 
-  .material-icons {
-    font-family: 'Material Icons';
-    font-weight: normal;
-    font-style: normal;
-    font-size: 24px;  /* Preferred icon size */
-    display: inline-block;
-    line-height: 1;
-    text-transform: none;
-    letter-spacing: normal;
-    word-wrap: normal;
-    white-space: nowrap;
-    direction: ltr;
-  
-    /* Support for all WebKit browsers. */
-    -webkit-font-smoothing: antialiased;
-    /* Support for Safari and Chrome. */
-    text-rendering: optimizeLegibility;
-  
-    /* Support for Firefox. */
-    -moz-osx-font-smoothing: grayscale;
-  
-    /* Support for IE. */
-    font-feature-settings: 'liga';
-  }
+.btn-p:hover{
+background: #5d2394;
+border-color: #5d2394;
+color: white;
+}
