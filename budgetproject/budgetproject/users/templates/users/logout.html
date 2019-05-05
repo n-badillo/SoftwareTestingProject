@@ -1,26 +1,11 @@
 {% extends 'budget/base.html' %}
 {% block content %}
-<div class="container rounded text-dark" style="background: #E7ECEF; ">
-    <div class="content-section">
-        <form method="POST">
-            {% csrf_token %}
-            <fieldset class="form-group">
-                <legend class="border-bottom mb-4">Join</legend>
-                {{ form.as_p }}
-            </fieldset>
-            <br/>
-            <div class="form-group">
-                <button class="btn btn-outline-info" type="submit">Sign Up</button>
-            </div>
-        </form>
-        <hr>
-        <div>
-            <small class="text-muted">
-                Already Have an Account? <a href="{% url 'login' %}" class="ml-2">Log In</a>
-            </small>
-        </div>
-        <br/><br/>
-    </div>
-
+<div class="margin-top-20-v container rounded text-dark">
+        <div class="jumbotron rounded jumbotron-fluid">
+                <div class="container">
+                  <h1 class="display-4">Goodbye!</h1>
+                  <p class="lead">You have successfully logged out</p>
+                </div>
+              </div>
 </div>
 {% endblock %}
