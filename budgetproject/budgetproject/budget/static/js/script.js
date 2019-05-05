@@ -15,10 +15,9 @@
 
     function addNewCategory(name){
         document.querySelector('#categoriesContainer').insertAdjacentHTML('beforeend', 
-         `<li class="category">
-            <span class="name">${name}</span>
-            <span onclick="removeCategory(this)" class="btnRemove bold">X</span>
-        </li>`)
+         `<li class="category text-white">
+            <span onclick="removeCategory(this)" class="name text-white btn" style="background:#C6DDFC; margin:1px;">${name}</span>
+            </li>`)
     }
     
 })()
@@ -46,3 +45,4 @@ function removeCategory(e){
     e.parentElement.remove()
     updateCategoriesString()
 }
+
