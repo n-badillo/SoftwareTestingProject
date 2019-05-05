@@ -1,39 +1,52 @@
 <!-- Main Project Dashboard for users -->
 
 {% extends 'budget/base.html' %}
+{% block title %}
+{% if user.is_authenticated%}
+| Dashboard{%endif%}{% endblock %}
+{%block page%}Dashboard{% endblock %}
+
 {% block content %}
+{% load humanize %}
 
 {% if user.is_authenticated %} <!-- If the user has an account, it will display the projects they have-->
-<div class="container txt-body">
-    <h4 class="display-4 text-white">Dashboard</h4>
-</div>
 
-<div class="txt-body bg-white" style="margin-top: 5vh; margin-bottom:padding-bottom: 15px;">
 
- <div class="container" style="padding: 15px;">
+<div class="txt-body bg-white padding-vert-5-v">
+ <div class="container">
     <div class="card" style="margin-top: 5px; margin-bottom: 5px; border-width: 0px;">
-        <div class="card-body" style="padding-top: 5px; padding-bottom: 5px; margin-right: 5px;">
+        <div class="card-body project-list-items">
             <div class="row">
-            <div class="col align-self-center txt-h1"><b>Project Name</b></div>
-            <div class="col align-self-center txt-h2" ><b>Starting Budget</b></div>
-            <div class="col align-self-center txt-h2"><b>Transactions</b></div>
-            <div class="col align-self-center txt-h2"><b>Budget Remaining</b></div>
-            <div class="align-self-center justify-content-end">
-                <a href="add" class="btn btn-b"> <b>+</b> Project</a>
+            <div class="col-sm-4 align-self-center txt-d-blue"><b>Project Name</b></div>
+            <div class="col-sm-1 d-flex align-self-center txt-l-blue" ><b><center>Starting Budget</center></b></div>
+            <div class="col-sm-4 align-self-center txt-l-blue"><b><center>Progress</center></b></div>
+            <div class="col-sm-1 d-flex align-self-center txt-l-blue"><b><center>Budget Remaining</center></b></div>
+            <div class="col-sm-2 align-self-center justify-content-end"><center>
+                <a href="add" class="btn btn-b"> <i class="fas fa-plus-square"></i>&ThickSpace; Project</a></center>
             </div>
         </div>
     </div>
 
     {% for project in project_list  %} <!-- displaying projects using a for loop -->
 
-    <div class="card" style="margin-top: 10px; margin-bottom: 10px; box-shadow: 0 0 5px 2px rgba(0,0,0,0.1);">
-        <div class="card-body" style="padding-top: 15px; padding-bottom: 15px; margin-right: 5px;">
+    <div class="card project-list">
+        <div class="card-body project-list-items">
             <div class="row">
-            <div class="col align-self-center txt-body"><b>{{ project.name  }}</b></div>
-            <div class="col align-self-center">${{project.budget}}</div>
-            <div class="col align-self-center ">{{project.total_transactions}}</div>
-            <div class="col align-self-center">${{project.budget_left}}</div>
-            <div class="align-self-center justify-content-end" style="margin-right: 20px;">      
+            <div class="col-sm-4 align-self-center txt-body"><b>{{ project.name  }}</b></div>
+            <div class="col-sm-2 align-self-center">${{project.budget|intcomma}}</div>
+            <div class="col-sm-3 align-self-center " style="margin: 10px;">
+                    <div class="progress">
+                            {% if project.budget_percentage < 45 %}
+                            <div class="progress-bar progress-bar-striped bg-success" style="width: {{project.budget_percentage}}%;" role="progressbar" aria-valuenow="{{project.budget_percentage}}" aria-valuemin="0" aria-valuemax="100"></div>
+                            {% elif project.budget_percentage < 75 %}
+                            <div class="progress-bar progress-bar-striped bg-warning " style="width: {{project.budget_percentage}}%; " role="progressbar" aria-valuenow="{{project.budget_percentage}}" aria-valuemin="0" aria-valuemax="100"></div>
+                            {% else %}
+                            <div class="progress-bar progress-bar-striped bg-danger" style="width: {{project.budget_percentage}}%; " role="progressbar" aria-valuenow="{{project.budget_percentage}}" aria-valuemin="0" aria-valuemax="100"></div>
+                            {% endif %}
+                    </div>
+            </div>
+            <div class="col align-self-center" style="margin: 0 25px 0 25px;">${{project.budget_left|intcomma}}</div>
+            <div class="col align-self-center justify-content-end" style="margin-right: 20px;">      
                 <a href="{% url 'detail' project.slug %}">View</a>
             </div>
 
@@ -41,13 +54,12 @@
         </div>
     </div>
 
-        {% empty %} <!-- If the user-->
+        {% empty %} <!-- If the user doesn't have projects -->
 
-            <div class="txt-body bg-white" style="padding-top: 15vh; padding-bottom: 15vh;">
+            <div class="txt-body bg-white padding-vert-15-v">
             <center>
-                    <h1 class="display-4" style="font-size:2.5rem; padding: 10px;" > No projects currently saved</h1>
-                    <a href="add" class="btn btn-outline-purple">Get started</a>
-                    <p style="padding: 10px;">
+                    <h1 class="display-4 display-alert">No projects currently saved</h1>
+                    <p>
                     <small>Need help getting started? <a href="#">Learn more!</a></small>
                     </p>
                 </center>
@@ -65,19 +77,61 @@
    
 
 {% else %}
-<center>
-        <h1 style="margin-top: 20vh;">Welcome to Budget Buddy</h1>
-        <div class="containter rounded bg-white text-dark" style="padding-top: 2vh; padding-bottom: 2vh; width: 40vw;">
-        <h3> Tracking your money, made easy.</h3>
-        <hr style="width: 30vw;">
-        <p>To use our web app you must either login or sign up with a new account.</p>
 
-     <a class="btn btn-lg btn-outline-blue btn-block" style="width: 25vw;" href="{% url 'login' %}" role="button">Login</a>
-          <a class="btn btn-lg btn-outline-blue btn-block" style="width: 25vw;" href="{% url 'register' %}" role="button">Register</a>
-        
-        </center>
+            <div class="welcome-display">
+                <center>
+                    <h1 class="display-3 text-white ">Welcome to Budget Buddy</h1>
+                    <p class=""><em>Because everything is better when you do it with a friend</em></p>
+                </center>
+            </div>
+
+<div class="bg-white">
+        <div class="container bg-white text-dark padding-vert-5-v">
+            <center>
+              
+                    <div class="container padding-vert-5-v"><center>
+                            <div class="row justify-content-md-center">
+                
+                                <div class="col col-lg-2">
+                                        <i class="material-icons md-48">email</i><br>
+                                        <b>Signup</b>
+                                        <br> 
+                                        Signup with your email.
+                                </div>
+                                <div class="col col-lg-2">
+                                        <i class="fas fa-file-contract"></i><br>
+                                        <b>Create</b><br>
+                                        Create budgeting projects.
+                                </div>
+                                <div class="col col-lg-2">
+                                        <i class="fas fa-tasks"></i><br>
+                                        <b>Categorize</b>
+                                        <br> 
+                                        Create categories to better track your expenses.
+                                </div>
+                                <div class="col col-lg-2">
+                                        <i class="fas fa-chart-line"></i><br>
+                                        <b>Track</b>
+                                        <br> 
+                                        Track your expenses, assist your knowledge.
+                                </div>
+                                <div class="col col-lg-2">
+                                        <i class="fas fa-wallet"></i><br>
+                                        <b>Spend</b><br>
+                                        Spend wisely.
+                                </div>
+                            </div>
+                        </center>
+                        </div>
+    
+                  <a class="btn btn-lg btn-outline-blue btn-block" style="width: 25vw;" href="{% url 'register' %}" role="button">Register</a>
+                
+                </center>
+                
         </div>
-    </div>
+</div>
+
+
 {% endif %}
 
 {% endblock  %}
