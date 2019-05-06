@@ -151,14 +151,13 @@
                         <input name="amount" class="form-control" id="amount" placeholder="Enter Amount">
 
                         <label for="category">Category</label>
-                        <select name="category">
+                        <select name="category" class="form-control">
                             {% for category in category_list %}
                             <option>{{ category.name }}</option>
                             {% endfor %}
                         </select>
-
-                        <button type="submit" class="btn btn-primary">Add Expense</button>
-
+                        <center>                        <button type="submit" class="btn btn-p btn-lg-30 margin-vert-1-v">Add Expense</button>
+                        </center>
                     </form>
                 </div>
             </div>
