@@ -1,9 +1,53 @@
 /*  General CSS for Body*/
-body{
-    background: linear-gradient(to top left, #7031AC 0%, #3088F3 100%);
-    color: white;
+
+body {
+    width: 100wh;
+    height: 90vh;
+    color: #fff;
+    background: linear-gradient(to bottom right, #23D5AB, #3088F3, #7031AC, #E73C7E);
     opacity: 0.95;
     background-attachment: fixed;
+    background-size: 400% 400%;
+    -webkit-animation: Gradient 15s ease infinite;
+    -moz-animation: Gradient 15s ease infinite;
+    animation: Gradient 20s ease infinite;
+}
+
+
+@-webkit-keyframes Gradient {
+    0% {
+        background-position: 0% 50%
+    }
+    50% {
+        background-position: 100% 50%
+    }
+    100% {
+        background-position: 0% 50%
+    }
+}
+
+@-moz-keyframes Gradient {
+    0% {
+        background-position: 0% 50%
+    }
+    50% {
+        background-position: 100% 50%
+    }
+    100% {
+        background-position: 0% 50%
+    }
+}
+
+@keyframes Gradient {
+    0% {
+        background-position: 0% 50%
+    }
+    50% {
+        background-position: 100% 50%
+    }
+    100% {
+        background-position: 0% 50%
+    }
 }
 
 footer {
